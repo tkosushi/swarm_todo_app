@@ -16,3 +16,11 @@ sudo kill -9 {PID}
 ### Tips:Macの場合
 AirPlayのレシーバーが5000番ポートを占有していることがあるらしい。  
 `システム設定 > 検索`からAirPlayレシーバをオフにできる。
+
+## overlayネットワークの構築
+本環境では、複数のホストで稼働しているDockerをDocker Swarmでオーケストレーションする際の練習として  
+dind(docker in docker)環境で構成されている。
+dind内のdocker群がお互いに通信可能になるよう、overlayネットワークを構築する。
+```bash
+$ docker container exec -it manager \ docker network create --driver=overlay --attachable todoapp
+```
